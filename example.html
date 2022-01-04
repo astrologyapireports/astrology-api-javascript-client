@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Astrology Api Reports Api JavaScript SDK</title>
+</head>
+<body>
+	<h3>Astrology Api Reports Api JavaScript SDK</h3>
+	<pre>
+		<div id="api-response"></div>
+	</pre>
+<script type="text/javascript" src="./sdk/ApiReportsClient.js"></script>
+<script type="text/javascript">
+	var ele = document.getElementById('api-response');
+	var USER_ID = '{USER_ID}';
+	var API_KEY = '{API_KEY}';
+	var request = new ApiReportsClient(USER_ID,API_KEY); 
+	request.setLanguage('hi'); //SET LANGUAGE
+
+	/* REQUESTED DATA */
+	var data = {
+		day:12,
+		month:3,
+		year:1992,
+		hour:2,
+		min:23,
+		lat:19.132,
+		lon:72.342,
+		tzone:5.5
+	};
+
+	/* CALLING PLANETS API */
+	request.callApi('planets',data,function(resStatus,resData){
+		var res = JSON.parse(resData);
+		console.log(res.data);
+		console.log(resStatus);
+		ele.innerHTML = JSON.stringify(res, null, 4);
+	});
+</script>
+</body>
+</html>
